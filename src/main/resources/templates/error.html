@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error</title>
+</head>
+<body>
+
+```
+<h1>Something went wrong</h1>
+
+<p th:if="${error}" th:text="${error}">
+  An unexpected error occurred.
+</p>
+
+<p th:if="${status}">
+  Error Code: <span th:text="${status}">500</span>
+</p>
+
+<a href="/">Go Back Home</a>
+```
+
+</body>
+</html>
