@@ -13,6 +13,8 @@ public class BuddyInfo {
     private String name;
     @Column
     private String phoneNumber;
+    @Column
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "fk_addressbook_id")
@@ -22,9 +24,10 @@ public class BuddyInfo {
     // Default no-arg constructor
     public BuddyInfo() {
     }
-    public BuddyInfo(String name, String phoneNumber) {
+    public BuddyInfo(String name, String phoneNumber, String address) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     public Long getId() {
@@ -44,6 +47,12 @@ public class BuddyInfo {
     }
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
     public void setAddressBook(AddressBook addressBook) {
         this.addressBook = addressBook;

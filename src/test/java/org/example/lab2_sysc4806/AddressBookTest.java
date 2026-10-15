@@ -9,7 +9,7 @@ class AddressBookTest {
     @Test
     void testAddBuddy() {
         AddressBook addressBook = new AddressBook();
-        addressBook.addBuddy(new BuddyInfo("John", "123-456-7890"));
+        addressBook.addBuddy(new BuddyInfo("John", "123-456-7890","505 Cygnus st"));
         assertEquals(1, addressBook.getBuddies().size());
     }
     @Test
