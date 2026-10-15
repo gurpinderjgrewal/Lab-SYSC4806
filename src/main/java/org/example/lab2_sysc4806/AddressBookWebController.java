@@ -11,6 +11,10 @@ public class AddressBookWebController {
     @Autowired
     private AddressBookRepo addressBookRepo;
 
+    @GetMapping("/")
+    public String index() {
+        return "HEllo";
+    }
     @GetMapping("/addressbooks/{id}/view")
     public String viewAddressBook(@PathVariable Long id, Model model) {
         AddressBook addressBook = addressBookRepo.findAddressBookById(id);
