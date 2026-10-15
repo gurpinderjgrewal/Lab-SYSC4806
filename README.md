@@ -9,8 +9,7 @@
 ---
 
 ## Deployment
-- **Azure Web App URL:** `https://addressbook-fwbdfqbtardtbqes.eastus-01.azurewebsites.net`
-- **Default View Route:** `https://addressbook-fwbdfqbtardtbqes.eastus-01.azurewebsites.net/addressbooks/1/view`
+- **Azure Web App URL:** https://addressbook-fwbdfqbtardtbqes.eastus-01.azurewebsites.net
 
 ---
 
