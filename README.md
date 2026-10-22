@@ -1,4 +1,4 @@
-# SYSC 4806 - Lab 5: Spring Boot Address Book
+# SYSC 4806 - Lab 6: Client-Side
 
 ## Student Information
 - **Name:** Jordan Grewal
