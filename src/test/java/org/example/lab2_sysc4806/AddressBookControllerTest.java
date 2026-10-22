@@ -54,7 +54,7 @@ public class AddressBookControllerTest {
     void testCreateAddressBook() throws Exception {
         when(addressBookRepo.save(any(AddressBook.class))).thenReturn(addressBook);
 
-        mockMvc.perform(post("/addressbooks"))
+        mockMvc.perform(post("/api/addressbooks"))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)));
@@ -64,7 +64,7 @@ public class AddressBookControllerTest {
     void testGetAllAddressBook() throws Exception {
         when(addressBookRepo.findAll()).thenReturn(Collections.singletonList(addressBook));
 
-        mockMvc.perform(get("/addressbooks"))
+        mockMvc.perform(get("/api/addressbooks"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -79,7 +79,7 @@ public class AddressBookControllerTest {
     void testCreateBuddyInfo() throws Exception {
         when(buddyInfoRepo.save(any(BuddyInfo.class))).thenReturn(buddyInfo);
 
-        mockMvc.perform(post("/buddies")
+        mockMvc.perform(post("/api/buddies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(buddyInfo)))
                 .andExpect(status().isCreated())
@@ -91,7 +91,7 @@ public class AddressBookControllerTest {
     void testGetAllBuddyInfo() throws Exception {
         when(buddyInfoRepo.findAll()).thenReturn(Arrays.asList(buddyInfo));
 
-        mockMvc.perform(get("/buddies"))
+        mockMvc.perform(get("/api/buddies"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -102,7 +102,7 @@ public class AddressBookControllerTest {
     void testGetBuddyInfoById_Success() throws Exception {
         when(buddyInfoRepo.findById(10L)).thenReturn(Optional.of(buddyInfo));
 
-        mockMvc.perform(get("/buddies/10"))
+        mockMvc.perform(get("/api/buddies/10"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(10)));
@@ -118,7 +118,7 @@ public class AddressBookControllerTest {
         when(buddyInfoRepo.findBuddyInfoById(10L)).thenReturn(buddyInfo);
         when(addressBookRepo.save(any(AddressBook.class))).thenReturn(addressBook);
 
-        mockMvc.perform(post("/addressbooks/1/buddies/10"))
+        mockMvc.perform(post("/api/addressbooks/1/buddies/10"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.buddies", hasSize(1)))
@@ -130,7 +130,7 @@ public class AddressBookControllerTest {
         when(addressBookRepo.findAddressBookById(1L)).thenReturn(null);
         when(buddyInfoRepo.findBuddyInfoById(10L)).thenReturn(buddyInfo);
 
-        mockMvc.perform(post("/addressbooks/1/buddies/10"))
+        mockMvc.perform(post("/api/addressbooks/1/buddies/10"))
                 .andExpect(status().isNotFound());
     }
 
@@ -139,7 +139,7 @@ public class AddressBookControllerTest {
         addressBook.addBuddy(buddyInfo);
         when(addressBookRepo.findAddressBookById(1L)).thenReturn(addressBook);
 
-        mockMvc.perform(get("/addressbooks/1/buddies"))
+        mockMvc.perform(get("/api/addressbooks/1/buddies"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -150,7 +150,7 @@ public class AddressBookControllerTest {
     void testGetBuddiesForAddressBook_NotFound() throws Exception {
         when(addressBookRepo.findAddressBookById(99L)).thenReturn(null);
 
-        mockMvc.perform(get("/addressbooks/99/buddies"))
+        mockMvc.perform(get("/api/addressbooks/99/buddies"))
                 .andExpect(status().isNotFound());
     }
 }
