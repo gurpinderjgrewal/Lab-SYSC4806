@@ -44,9 +44,6 @@ public class AddressBookControllerTest {
 
         buddyInfo = new BuddyInfo();
         buddyInfo.setId(10L);
-        // Assuming common properties for BuddyInfo (e.g., name, phone):
-        // buddyInfo.setName("John Doe");
-        // buddyInfo.setPhoneNumber("613-123-4567");
     }
 
     // -------------------------------------------------------------

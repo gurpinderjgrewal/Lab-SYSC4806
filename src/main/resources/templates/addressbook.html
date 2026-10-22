@@ -2,60 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Address Book</title>
+    <title th:text="'Address Book #' + ${addressBook.id}">Address Book</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 600px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 30px auto; padding: 0 15px; color: #222; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background-color: #f7f7f7; }
+        input[type="text"] { padding: 6px; margin: 4px 8px 4px 0; border: 1px solid #ccc; border-radius: 3px; }
+        button { padding: 6px 12px; cursor: pointer; border: 1px solid #999; border-radius: 3px; background: #eee; }
+        button:hover { background: #ddd; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-<h1>Address Book #<span th:text="${addressBook.id}"></span></h1>
 
-<h2>Buddies</h2>
+<p><a th:href="@{/}">&larr; Back to all Address Books</a></p>
 
-<div th:if="${#lists.isEmpty(buddies)}">
-    <p>No buddies in this address book yet.</p>
-</div>
+<h1 th:text="'Address Book #' + ${addressBook.id}">Address Book #1</h1>
 
-<table th:unless="${#lists.isEmpty(buddies)}">
+<h3>Add Buddy</h3>
+<form th:action="@{/addressbook/{addressBookId}/buddies/create(addressBookId=${addressBook.id})}" th:object="${newBuddy}" method="post">
+    <input type="text" th:field="*{name}" placeholder="Name" required />
+    <input type="text" th:field="*{phoneNumber}" placeholder="Phone" required />
+    <input type="text" th:field="*{address}" placeholder="Address" required />
+    <button type="submit">Add</button>
+</form>
+
+<h3>Buddies</h3>
+<table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Phone Number</th>
+        <th>Phone</th>
         <th>Address</th>
     </tr>
     </thead>
     <tbody>
+    <tr th:if="${#lists.isEmpty(buddies)}">
+        <td colspan="4">No buddies yet.</td>
+    </tr>
     <tr th:each="buddy : ${buddies}">
-        <td th:text="${buddy.id}"></td>
-        <td th:text="${buddy.name}"></td>
-        <td th:text="${buddy.phoneNumber}"></td>
-        <td th:text="${buddy.address}"></td>
+        <td th:text="${buddy.id}">1</td>
+        <td th:text="${buddy.name}">Alice Smith</td>
+        <td th:text="${buddy.phoneNumber}">613-555-0101</td>
+        <td th:text="${buddy.address}">1125 Colonel By Dr</td>
     </tr>
     </tbody>
 </table>
+
 </body>
 </html>

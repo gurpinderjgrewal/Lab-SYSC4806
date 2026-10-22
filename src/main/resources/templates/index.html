@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Books</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 30px auto; padding: 0 15px; color: #222; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background-color: #f7f7f7; }
+        button { padding: 6px 12px; cursor: pointer; border: 1px solid #999; border-radius: 3px; background: #eee; }
+        button:hover { background: #ddd; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<h1>Address Books</h1>
+
+<form th:action="@{/addressbook/create}" method="post">
+    <button type="submit">Create New Address Book</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Buddies</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(addressBooks)}">
+        <td colspan="3">No address books found.</td>
+    </tr>
+    <tr th:each="book : ${addressBooks}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${#lists.size(book.buddies)}">0</td>
+        <td>
+            <a th:href="@{/addressbook/{id}(id=${book.id})}">View Buddies</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

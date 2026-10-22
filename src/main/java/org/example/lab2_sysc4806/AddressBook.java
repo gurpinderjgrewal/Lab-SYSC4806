@@ -14,7 +14,7 @@ public class AddressBook{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "addressBook", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "addressBook", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<BuddyInfo> buddies;
 
